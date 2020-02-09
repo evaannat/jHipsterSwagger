@@ -26,7 +26,7 @@ public class InterestResource {
 
     private static final String ENTITY_NAME = "interest";
 
-    @Value("apka")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final InterestRepository interestRepository;

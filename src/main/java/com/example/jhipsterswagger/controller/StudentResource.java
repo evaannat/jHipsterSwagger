@@ -25,7 +25,7 @@ public class StudentResource {
 
     private static final String ENTITY_NAME = "student";
 
-    @Value("apka")
+    @Value("${jhipster.clientApp.name}")
     private String applicationName;
 
     private final StudentRepository studentRepository;
