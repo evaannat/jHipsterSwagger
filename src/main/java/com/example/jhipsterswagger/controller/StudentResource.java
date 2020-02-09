@@ -5,6 +5,7 @@ import com.example.jhipsterswagger.repository.StudentRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * REST controller for managing {@link com.example.jhipsterswagger.model.Student}.
@@ -90,12 +90,22 @@ public class StudentResource {
      * @param id the id of the student to retrieve.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the student, or with status {@code 404 (Not Found)}.
      */
+
     @GetMapping("/students/{id}")
     public ResponseEntity<Student> getStudent(@PathVariable Long id) {
         log.debug("REST request to get Student : {}", id);
-        Optional<Student> student = studentRepository.findOneWithEagerRelationships(id);
-        return ResponseUtil.wrapOrNotFound(student);
+        Student student = studentRepository.findOneWithEagerRelationships(id).get();
+        return new ResponseEntity<>(student, null, HttpStatus.OK);
     }
+
+//    //ALTERNATYWNA METODA
+//
+//    @GetMapping("/students/{id}")
+//    public Student getStudentById(@PathVariable Long id) {
+//        log.debug("REST request to get Student : {}", id);
+//        Student student = studentRepository.findOneWithEagerRelationships(id).get();
+//        return student;
+//    }
 
     /**
      * {@code DELETE  /students/:id} : delete the "id" student.

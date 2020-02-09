@@ -1,4 +1,4 @@
-# jhipsterZadanie
+# jHipsterSwagger
 
 This application was created using Spring Initializr in IntelliJ with support of jHipster.
 
